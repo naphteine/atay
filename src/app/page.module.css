@@ -4,4 +4,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
