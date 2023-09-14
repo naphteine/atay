@@ -1,10 +1,13 @@
 .main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  user-drag: none;
-  user-select: none;
-  pointer-events: none;
+  
+}
+
+.header {
+  background-color: #232631;
+  color: #dff4ff;
+  height: 100vh;
+}
+
+.header h2 {
+  margin: 0;
 }
