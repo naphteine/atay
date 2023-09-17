@@ -945,6 +945,7 @@ __metadata:
     eslint: 8.48.0
     eslint-config-next: 13.4.19
     next: 13.4.19
+    pocketbase: ^0.18.0
     react: 18.2.0
     react-dom: 18.2.0
     typescript: 5.2.2
@@ -2754,6 +2755,13 @@ __metadata:
   version: 2.3.1
   resolution: "picomatch@npm:2.3.1"
   checksum: 050c865ce81119c4822c45d3c84f1ced46f93a0126febae20737bd05ca20589c564d6e9226977df859ed5e03dc73f02584a2b0faad36e896936238238b0446cf
+  languageName: node
+  linkType: hard
+
+"pocketbase@npm:^0.18.0":
+  version: 0.18.0
+  resolution: "pocketbase@npm:0.18.0"
+  checksum: 3bd7f66a42aef1f6aaa7573ebc4f2b26b8ca10ee54c8d74c7527e160ba471622e37cb38a59244dd22d41d904772fb96c0d124a6b8035c0dc0e2e4645d04fd790
   languageName: node
   linkType: hard
 
