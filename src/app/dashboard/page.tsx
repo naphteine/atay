@@ -10,11 +10,15 @@ export default function Page() {
 
   const { model } = JSON.parse(cookie.value);
 
+  const registerDate = new Date(model.created);
+
   return (
     <main>
       <p>This is the dashboard. Only logged-in users can view this route</p>
       <p>Logged-in user: </p>
-      <pre>{JSON.stringify(model, null, 2)}</pre>
+      <h2>{model.username}</h2>
+      <h3>Registered: {registerDate.toLocaleDateString()}</h3>
+      <h3>E-Mail: {model.email} <em>{model.emailVisibility ? "VISIBLE" : "INVISIBLE"}</em></h3>
       <form action={logout}>
         <button type="submit">logout</button>
       </form>

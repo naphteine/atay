@@ -3,7 +3,7 @@ import PocketBase from "pocketbase";
 export default async function Home() {
   const pb = new PocketBase(process.env.POCKETBASE_URL);
 
-  const booksData = await pb.collection("atay_books").getList(1, 20);
+  const booksData = await pb.collection("atay_books").getList(1, 10);
 
   return (
     <>

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isTokenExpired } from 'pocketbase';
 
 export function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith('/dashboard')) {
+  if (request.nextUrl.pathname.startsWith('/dashboard') || request.nextUrl.pathname.startsWith('/new')) {
     const authCookie = request.cookies.get('pb_auth');
     const token = authCookie?.value ? JSON.parse(authCookie.value).token : null;
 
