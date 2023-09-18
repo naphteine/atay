@@ -1,13 +1,10 @@
-import Header from "@/components/Header";
-import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Metadata } from "next";
+import { Providers } from "./providers";
+import "@/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Atay",
-  description: "Book tracking app",
+  description: "Book Tracking App",
 };
 
 export default function RootLayout({
@@ -15,15 +12,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header />
-
-        {children}
-        
-        </body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

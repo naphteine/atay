@@ -1,49 +1,61 @@
-import { cookies } from "next/headers";
+"use client";
+
+import useAuth from "@/context/AuthProvider";
+import pb from "@/lib/pocketbase";
+import styles from "@/styles/components/Header.module.css";
+import Image from "next/image";
 import Link from "next/link";
-import styles from "@/styles/Header.module.css";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
-const Header = () => {
-  const cookie = cookies().get("pb_auth");
+export default function Header() {
+  const currentRoute = usePathname();
+  const { auth, setAuth } = useAuth();
 
-  let isLoggedIn = false;
-  let userName = "";
-
-  if (cookie) {
-    try {
-      const { model } = JSON.parse(cookie.value);
-
-      isLoggedIn = model ? true : false;
-      userName = model.username;
-    } catch (e) {
-      isLoggedIn = false;
-      userName = "";
-    }
-  }
+  useEffect(() => {
+    setAuth(pb.authStore.isValid);
+  });
 
   return (
-    <header>
-      <h1>ATAY</h1>
+    <header className={styles.header}>
+      <Image
+        className={styles.logo}
+        src="/logo.svg"
+        alt="Atay Logo"
+        width={320}
+        height={128}
+      />
+      <h1 className={styles.description}>Book Tracking App</h1>
+
       <nav>
-        <Link className={styles.button} href="/">
-          Home
+        <Link
+          className={`${styles.link} ${
+            currentRoute == "/" ? styles.activeLink : ""
+          }`}
+          href="/"
+        >
+          Search
         </Link>
-        {isLoggedIn ? (
-          <>
-            <Link className={styles.button} href="/dashboard">
-              Profile
-            </Link>
-            <Link className={styles.button} href="/new">
-              Add new book
-            </Link>
-          </>
+        {auth ? (
+          <Link
+            className={`${styles.link} ${
+              currentRoute == "/dashboard" ? styles.activeLink : ""
+            }`}
+            href="/dashboard"
+          >
+            Dashboard
+          </Link>
         ) : (
-          <Link className={styles.button} href="/login">
+          <Link
+            className={`${styles.link} ${
+              currentRoute == "/login" ? styles.activeLink : ""
+            }`}
+            href="/login"
+          >
             Login
           </Link>
         )}
       </nav>
     </header>
   );
-};
-
-export default Header;
+}

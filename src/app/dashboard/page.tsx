@@ -1,27 +1,38 @@
-import { cookies } from 'next/headers';
-import { logout } from '../actions';
+"use client";
 
-export default function Page() {
-  const cookie = cookies().get('pb_auth');
+import Header from "@/components/Header";
+import useAuth from "@/context/AuthProvider";
+import pb from "@/lib/pocketbase";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-  // This never happens because of the middleware,
-  // but we must make typescript happy
-  if (!cookie) throw new Error('Not logged in');
+export default function Profile() {
+  const { auth, setAuth } = useAuth();
+  const [userData, setUserData] = useState(pb.authStore.model);
+  const router = useRouter();
 
-  const { model } = JSON.parse(cookie.value);
+  useEffect(() => {
+    setAuth(pb.authStore.isValid);
+    setUserData(pb.authStore.model);
+  }, []);
 
-  const registerDate = new Date(model.created);
+  const logoutUser = () => {
+    pb.authStore.clear();
+    setAuth(false);
+    setUserData(pb.authStore.model);
+    router.push("/");
+  };
 
   return (
-    <main>
-      <p>This is the dashboard. Only logged-in users can view this route</p>
-      <p>Logged-in user: </p>
-      <h2>{model.username}</h2>
-      <h3>Registered: {registerDate.toLocaleDateString()}</h3>
-      <h3>E-Mail: {model.email} <em>{model.emailVisibility ? "VISIBLE" : "INVISIBLE"}</em></h3>
-      <form action={logout}>
-        <button type="submit">logout</button>
-      </form>
-    </main>
+    <>
+      <Header />
+      <h1>Profile</h1>
+      {auth && (
+        <>
+          <h2>{userData?.email}</h2>
+          <button onClick={logoutUser}>Logout</button>
+        </>
+      )}
+    </>
   );
 }
