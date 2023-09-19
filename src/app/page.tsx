@@ -15,6 +15,9 @@ export default async function Home() {
           return (
             <>
               <h2>{book.name}</h2>
+              <img
+                src={`https://duga1.xyz/api/files/${book.collectionId}/${book.id}/${book.cover}`}
+              />
             </>
           );
         })}
