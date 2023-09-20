@@ -1,5 +1,4 @@
 import styles from "@/styles/pages/Home.module.css";
-import Header from "@/components/Header";
 import PocketBase from "pocketbase";
 
 export default async function Home() {
@@ -8,19 +7,19 @@ export default async function Home() {
 
   return (
     <>
-      <Header />
-
       <main className={styles.main}>
+        <ul>
         {data.items.map((book) => {
           return (
-            <>
+            <li key={book.id}>
               <h2>{book.name}</h2>
               <img
-                src={`https://duga1.xyz/api/files/${book.collectionId}/${book.id}/${book.cover}`}
+                src={`${process.env.POCKETBASE_URL}/api/files/${book.collectionId}/${book.id}/${book.cover}`}
               />
-            </>
+            </li>
           );
         })}
+        </ul>
       </main>
     </>
   );

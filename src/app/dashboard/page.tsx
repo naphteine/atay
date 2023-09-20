@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Header";
 import useAuth from "@/context/AuthProvider";
 import pb from "@/lib/pocketbase";
 import { useRouter } from "next/navigation";
@@ -25,7 +24,6 @@ export default function Profile() {
 
   return (
     <>
-      <Header />
       <h1>Profile</h1>
       {auth && (
         <>

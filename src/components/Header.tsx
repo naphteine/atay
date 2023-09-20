@@ -37,6 +37,7 @@ export default function Header() {
           Search
         </Link>
         {auth ? (
+          <>
           <Link
             className={`${styles.link} ${
               currentRoute == "/dashboard" ? styles.activeLink : ""
@@ -45,6 +46,15 @@ export default function Header() {
           >
             Dashboard
           </Link>
+          <Link
+            className={`${styles.link} ${
+              currentRoute == "/new" ? styles.activeLink : ""
+            }`}
+            href="/new"
+          >
+            New book
+          </Link>
+          </>
         ) : (
           <Link
             className={`${styles.link} ${
