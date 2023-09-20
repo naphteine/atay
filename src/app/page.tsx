@@ -1,3 +1,4 @@
+import BookItem from "@/components/BookItem";
 import styles from "@/styles/pages/Home.module.css";
 import PocketBase from "pocketbase";
 
@@ -9,16 +10,15 @@ export default async function Home() {
     <>
       <main className={styles.main}>
         <ul>
-        {data.items.map((book) => {
-          return (
-            <li key={book.id}>
-              <h2>{book.name}</h2>
-              <img
-                src={`${process.env.POCKETBASE_URL}/api/files/${book.collectionId}/${book.id}/${book.cover}`}
+          {data.items.map((book) => {
+            return (
+              <BookItem
+                key={book.id}
+                name={book.name}
+                cover={`${process.env.POCKETBASE_URL}/api/files/${book.collectionId}/${book.id}/${book.cover}`}
               />
-            </li>
-          );
-        })}
+            );
+          })}
         </ul>
       </main>
     </>

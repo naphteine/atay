@@ -19,6 +19,13 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
+
+          <footer>
+            <p>
+              Made with ❤ and care. All rights reserved &copy; 2023.{" "}
+              <a href="https://www.gokaygultekin.dev">Gökay Gültekin</a>
+            </p>
+          </footer>
         </Providers>
       </body>
     </html>
