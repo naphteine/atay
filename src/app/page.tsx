@@ -15,7 +15,7 @@ export default async function Home() {
               <BookItem
                 key={book.id}
                 name={book.name}
-                cover={`${process.env.POCKETBASE_URL}/api/files/${book.collectionId}/${book.id}/${book.cover}`}
+                cover={`https://duga1.xyz/api/files/${book.collectionId}/${book.id}/${book.cover}`}
               />
             );
           })}
