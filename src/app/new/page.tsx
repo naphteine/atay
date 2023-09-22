@@ -7,6 +7,7 @@ import pb from "@/lib/pocketbase";
 const New = () => {
   const [formData, setFormData] = useState({
     bookName: "",
+    bookAuthor: "",
     bookISBN: "",
     bookPage: 0,
     bookCover: null as File | null,
@@ -74,6 +75,13 @@ const New = () => {
           value={formData.bookName}
           onChange={handleChange}
           label="Book name"
+          variant="filled"
+        />
+        <TextField
+          name="bookAuthor"
+          value={formData.bookAuthor}
+          onChange={handleChange}
+          label="Author"
           variant="filled"
         />
         <TextField

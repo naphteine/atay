@@ -36,24 +36,32 @@ export default function Header() {
         >
           Search
         </Link>
+        <Link
+          className={`${styles.link} ${
+            currentRoute == "/authors" ? styles.activeLink : ""
+          }`}
+          href="/authors"
+        >
+          Authors
+        </Link>
         {auth ? (
           <>
-          <Link
-            className={`${styles.link} ${
-              currentRoute == "/dashboard" ? styles.activeLink : ""
-            }`}
-            href="/dashboard"
-          >
-            Dashboard
-          </Link>
-          <Link
-            className={`${styles.link} ${
-              currentRoute == "/new" ? styles.activeLink : ""
-            }`}
-            href="/new"
-          >
-            New book
-          </Link>
+            <Link
+              className={`${styles.link} ${
+                currentRoute == "/dashboard" ? styles.activeLink : ""
+              }`}
+              href="/dashboard"
+            >
+              Dashboard
+            </Link>
+            <Link
+              className={`${styles.link} ${
+                currentRoute == "/new" ? styles.activeLink : ""
+              }`}
+              href="/new"
+            >
+              New book
+            </Link>
           </>
         ) : (
           <Link
