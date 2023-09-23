@@ -1,25 +1,11 @@
-import BookItem from "@/components/BookItem";
+import LastAddedBooks from "@/components/LastAddedBooks";
 import styles from "@/styles/pages/Home.module.css";
-import PocketBase from "pocketbase";
 
-export default async function Home() {
-  const pb = new PocketBase("https://duga1.xyz");
-  const data = await pb.collection("atay_books").getList(1, 20);
-
+export default function Home() {
   return (
     <>
       <main className={styles.main}>
-        <ul>
-          {data.items.map((book) => {
-            return (
-              <BookItem
-                key={book.id}
-                name={book.name}
-                cover={`https://duga1.xyz/api/files/${book.collectionId}/${book.id}/${book.cover}`}
-              />
-            );
-          })}
-        </ul>
+        <LastAddedBooks />
       </main>
     </>
   );
