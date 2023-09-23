@@ -47,23 +47,15 @@ const New = () => {
       user_id: pb.authStore.model.id,
     };
 
-    try {
-      const response = await pb.collection("atay_books").create(formDataToSend);
-
-      if (response.ok) {
-        // Data was successfully uploaded
-        console.log("Book added successfully!");
-      } else {
-        // Handle any errors here
-        console.error(
-          "Failed to add book:",
-          response.status,
-          response.statusText
-        );
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
+    const response = await pb
+      .collection("atay_books")
+      .create(formDataToSend)
+      .then(() => {
+        alert("Book added successfully!");
+      })
+      .catch((err) => {
+        alert("ERROR: " + err);
+      });
   };
 
   return (
