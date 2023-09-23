@@ -82,6 +82,7 @@ const New = () => {
           onChange={handleChange}
           label="ISBN"
           variant="filled"
+          autoComplete="off"
         />
         <TextField
           name="bookPage"
