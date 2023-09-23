@@ -1,3 +1,4 @@
+import BookItem from "@/components/BookItem";
 import styles from "@/styles/pages/Home.module.css";
 import PocketBase from "pocketbase";
 
@@ -22,7 +23,17 @@ export default async function Home() {
       <main className={styles.main}>
         {data &&
           data.items.map((book) => {
-            return <li key={book.id}>{book.name}</li>;
+            return (
+              <BookItem
+                key={book.id}
+                name={book.name}
+                cover={
+                  book.cover
+                    ? `https://duga1.xyz/api/files/${book.collectionId}/${book.id}/${book.cover}`
+                    : `/book.svg`
+                }
+              />
+            );
           })}
       </main>
     </>
