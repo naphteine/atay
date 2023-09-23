@@ -60,8 +60,6 @@ export default function Login() {
 
   return (
     <>
-      <Header />
-
       <main className={styles.main}>
         <h1>Login</h1>
 
