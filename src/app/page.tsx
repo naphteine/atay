@@ -27,6 +27,7 @@ export default async function Home() {
               <BookItem
                 key={book.id}
                 name={book.name}
+                isbn={book.isbn}
                 cover={
                   book.cover
                     ? `https://duga1.xyz/api/files/${book.collectionId}/${book.id}/${book.cover}`
