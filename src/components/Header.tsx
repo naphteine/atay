@@ -29,6 +29,7 @@ export default function Header() {
 
       <nav>
         <Link
+          draggable="false"
           className={`${styles.link} ${
             currentRoute == "/" ? styles.activeLink : ""
           }`}
@@ -37,6 +38,7 @@ export default function Header() {
           Search
         </Link>
         <Link
+          draggable="false"
           className={`${styles.link} ${
             currentRoute == "/authors" ? styles.activeLink : ""
           }`}
@@ -47,6 +49,7 @@ export default function Header() {
         {auth ? (
           <>
             <Link
+              draggable="false"
               className={`${styles.link} ${
                 currentRoute == "/dashboard" ? styles.activeLink : ""
               }`}
@@ -55,6 +58,7 @@ export default function Header() {
               Dashboard
             </Link>
             <Link
+              draggable="false"
               className={`${styles.link} ${
                 currentRoute == "/new" ? styles.activeLink : ""
               }`}
@@ -65,6 +69,7 @@ export default function Header() {
           </>
         ) : (
           <Link
+            draggable="false"
             className={`${styles.link} ${
               currentRoute == "/login" ? styles.activeLink : ""
             }`}
