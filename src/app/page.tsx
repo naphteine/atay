@@ -5,7 +5,7 @@ import PocketBase from "pocketbase";
 export const fetchCache = "default-no-store";
 
 async function getData() {
-  const pb = new PocketBase("https://duga1.xyz");
+  const pb = new PocketBase("https://aya.gokay.works");
   const data = pb.collection("atay_books").getList(1, 20);
 
   if (!data) {
@@ -30,7 +30,7 @@ export default async function Home() {
                 isbn={book.isbn}
                 cover={
                   book.cover
-                    ? `https://duga1.xyz/api/files/${book.collectionId}/${book.id}/${book.cover}`
+                    ? `https://aya.gokay.works/api/files/${book.collectionId}/${book.id}/${book.cover}`
                     : `/book.svg`
                 }
               />
