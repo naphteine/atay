@@ -21,21 +21,22 @@ export default async function Home() {
   return (
     <>
       <main className={styles.main}>
-        {data &&
-          data.items.map((book) => {
-            return (
-              <BookItem
-                key={book.id}
-                name={book.name}
-                isbn={book.isbn}
-                cover={
-                  book.cover
-                    ? `https://aya.gokay.works/api/files/${book.collectionId}/${book.id}/${book.cover}`
-                    : `/book.svg`
-                }
-              />
-            );
-          })}
+        <div className={styles.bookList}>
+          {data &&
+            data.items.map((book) => {
+              return (
+                <BookItem
+                  key={book.id}
+                  name={book.name}
+                  isbn={book.isbn}
+                  cover={
+                    book.cover &&
+                    `https://aya.gokay.works/api/files/${book.collectionId}/${book.id}/${book.cover}`
+                  }
+                />
+              );
+            })}
+        </div>
       </main>
     </>
   );

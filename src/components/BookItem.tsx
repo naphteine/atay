@@ -1,3 +1,5 @@
+import styles from "@/styles/components/BookItem.module.css";
+
 interface BookItemProps {
   name: string;
   cover: string;
@@ -6,12 +8,23 @@ interface BookItemProps {
 
 const BookItem: React.FC<BookItemProps> = ({ name, cover, isbn }) => {
   return (
-    <>
-      <h3>{name}</h3>
-      {isbn && <h4>ISBN: {isbn}</h4>}
-      <img src={cover} alt={`${name} cover`} width={160} />
-    </>
+    <div className={styles.bookItem}>
+      {cover ? (
+        <img
+          className={styles.bookCover}
+          src={cover}
+          alt={`${name} cover`}
+          width={160}
+        />
+      ) : (
+        <div className={styles.emptyCover}>
+          {name}
+          <br />
+          {isbn}
+        </div>
+      )}
+    </div>
   );
 };
-
+0;
 export default BookItem;

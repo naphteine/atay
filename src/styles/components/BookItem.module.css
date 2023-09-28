@@ -1,0 +1,21 @@
+.bookItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+.emptyCover {
+    background-color: gainsboro;
+    border-radius: 10px;
+    width: 100%;
+    aspect-ratio: 0.7;
+    height: 100%;
+}
+
+.bookCover {
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+}
