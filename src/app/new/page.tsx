@@ -3,6 +3,7 @@
 import { TextField, Button } from "@mui/material";
 import { useState, ChangeEvent, FormEvent } from "react";
 import pb from "@/lib/pocketbase";
+import AuthorField from "@/components/AuthorField";
 
 const New = () => {
   const [formData, setFormData] = useState({
@@ -70,13 +71,6 @@ const New = () => {
           variant="filled"
         />
         <TextField
-          name="bookAuthor"
-          value={formData.bookAuthor}
-          onChange={handleChange}
-          label="Author"
-          variant="filled"
-        />
-        <TextField
           name="bookISBN"
           value={formData.bookISBN}
           onChange={handleChange}
@@ -98,6 +92,7 @@ const New = () => {
           accept=".png,.jpeg,.jpg"
           onChange={handleCoverChange}
         />
+        <AuthorField />
         <Button type="submit" variant="contained" color="primary">
           Add new book
         </Button>
