@@ -1,43 +1,9 @@
-import BookItem from "@/components/BookItem";
-import styles from "@/styles/pages/Home.module.css";
-import PocketBase from "pocketbase";
-
-export const fetchCache = "default-no-store";
-
-async function getData() {
-  const pb = new PocketBase("https://aya.gokay.works");
-  const data = pb.collection("atay_books").getList(1, 20);
-
-  if (!data) {
-    throw Error("No data!");
-  }
-
-  return data;
-}
-
-export default async function Home() {
-  const data = await getData();
-
+const Home = () => {
   return (
     <>
-      <main className={styles.main}>
-        <div className={styles.bookList}>
-          {data &&
-            data.items.map((book) => {
-              return (
-                <BookItem
-                  key={book.id}
-                  name={book.name}
-                  isbn={book.isbn}
-                  cover={
-                    book.cover &&
-                    `https://aya.gokay.works/api/files/${book.collectionId}/${book.id}/${book.cover}`
-                  }
-                />
-              );
-            })}
-        </div>
-      </main>
+      <h1>Atay</h1>
     </>
   );
-}
+};
+
+export default Home;
