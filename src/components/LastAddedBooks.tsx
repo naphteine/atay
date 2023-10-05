@@ -24,7 +24,7 @@ const LastAddedBooks = () => {
       <h2>Last added books</h2>
       {data &&
         data.items.map((book) => {
-          return <li>{book.name}</li>;
+          return <li key={book.id}>{book.name}</li>;
         })}
     </>
   );
