@@ -59,6 +59,7 @@ const AddBook = () => {
         placeholder="page count"
         name="pages"
         type="number"
+        min="0"
         onChange={handleChange}
         value={book.pages}
       />
