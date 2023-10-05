@@ -4,12 +4,15 @@ import pb from "@/lib/pocketbase";
 import { useEffect, useState } from "react";
 
 const Header = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     setLoggedIn(pb.authStore.isValid);
+
+    if (pb.authStore?.model?.username) setName(pb.authStore.model.username);
   }, []);
 
   const emailChange = (e: any) => {
@@ -41,7 +44,7 @@ const Header = () => {
     <>
       {loggedIn ? (
         <>
-          <h2>LOGGED IN: {pb.authStore?.model?.name}</h2>
+          <h2>LOGGED IN: {name}</h2>
           <button onClick={logout}>Logout</button>
         </>
       ) : (
