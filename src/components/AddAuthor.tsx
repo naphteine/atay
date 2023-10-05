@@ -12,13 +12,19 @@ const AddAuthor = () => {
 
   const addAuthor = async () => {
     if (!pb.authStore.model) return alert("Not logged in!");
+    if (author === "") return alert("Author name can't be empty!");
 
     try {
-      const result = await pb
-        .collection("atay_authors")
-        .create([{ name: author, user: pb.authStore.model.id }]);
+      const data = {
+        name: author,
+        user: pb.authStore.model.id,
+      };
+
+      const result = await pb.collection("atay_authors").create(data);
     } catch (e) {
       alert(e);
+    } finally {
+      setAuthor("");
     }
   };
 
