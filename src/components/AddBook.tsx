@@ -15,6 +15,7 @@ interface bookObject {
 
 const AddBook = () => {
   const [authorList, setAuthorList] = useState<RecordModel[] | null>(null);
+  const [selectedAuthors, setSelectedAuthors] = useState<RecordModel[]>([]);
 
   const [book, setBook] = useState<bookObject>({
     name: "",
@@ -31,6 +32,13 @@ const AddBook = () => {
     } catch (e) {
       alert(e);
     }
+  };
+
+  const handleAutocompleteChange = (
+    event: React.ChangeEvent<{}>,
+    newValue: RecordModel[] | null
+  ) => {
+    setSelectedAuthors(newValue || []);
   };
 
   useEffect(() => {
@@ -84,12 +92,11 @@ const AddBook = () => {
         <Autocomplete
           multiple
           id="author"
+          value={selectedAuthors}
+          onChange={handleAutocompleteChange}
           getOptionLabel={(author) => author.name}
           options={authorList}
           noOptionsText="Nothing found!"
-          onChange={(event, value) => {
-            console.log(value);
-          }}
           filterSelectedOptions
           renderInput={(params) => <TextField {...params} label="Author(s)" />}
           renderOption={(props, option) => {
