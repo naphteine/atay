@@ -56,11 +56,28 @@ const AddBook = () => {
     if (book.name === "") return alert("Book name can't be empty!");
     if (!pb.authStore?.model?.id) return alert("You are not logged in!");
 
+    const userId = pb.authStore.model.id;
+
     const result = await pb
       .collection("atay_books")
-      .create({ ...book, user_id: pb.authStore.model.id });
+      .create({ ...book, user_id: userId });
+
+    console.log("BOOK RESULT: " + result);
+    const bookId = result.id;
+
+    console.log("bookId = " + bookId);
+
+    selectedAuthors.map(async (author) => {
+      const result_author = await pb.collection("atay_bookAuthors").create({
+        book: bookId,
+        author: author.id,
+        user: userId,
+      });
+      console.log("AUTHOR RESULT: " + result_author);
+    });
 
     setBook({ name: "", isbn: "", pages: 0, cover: null, user_id: "" });
+    setSelectedAuthors([]);
   };
 
   return (
