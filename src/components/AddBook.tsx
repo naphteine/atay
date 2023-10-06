@@ -2,7 +2,7 @@
 
 import pb from "@/lib/pocketbase";
 import { Autocomplete, Chip, TextField } from "@mui/material";
-import { ListResult, RecordModel } from "pocketbase";
+import { RecordModel } from "pocketbase";
 import { ChangeEvent, useState, useEffect } from "react";
 
 interface bookObject {
