@@ -1,7 +1,9 @@
 "use client";
 
 import pb from "@/lib/pocketbase";
-import { ChangeEvent, useState } from "react";
+import { Autocomplete, Chip, TextField } from "@mui/material";
+import { ListResult, RecordModel } from "pocketbase";
+import { ChangeEvent, useState, useEffect } from "react";
 
 interface bookObject {
   name: string;
@@ -12,6 +14,8 @@ interface bookObject {
 }
 
 const AddBook = () => {
+  const [authorList, setAuthorList] = useState<RecordModel[] | null>(null);
+
   const [book, setBook] = useState<bookObject>({
     name: "",
     isbn: "",
@@ -19,6 +23,19 @@ const AddBook = () => {
     cover: null,
     user_id: "",
   });
+
+  const getAuthorList = async () => {
+    try {
+      const result = await pb.collection("atay_authors").getFullList();
+      setAuthorList(result);
+    } catch (e) {
+      alert(e);
+    }
+  };
+
+  useEffect(() => {
+    getAuthorList();
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "pages" && +e.target.value < 0)
@@ -63,6 +80,36 @@ const AddBook = () => {
         onChange={handleChange}
         value={book.pages}
       />
+      {authorList && (
+        <Autocomplete
+          multiple
+          id="author"
+          getOptionLabel={(author) => author.name}
+          options={authorList}
+          noOptionsText="Nothing found!"
+          onChange={(event, value) => {
+            console.log(value);
+          }}
+          filterSelectedOptions
+          renderInput={(params) => <TextField {...params} label="Author(s)" />}
+          renderOption={(props, option) => {
+            return (
+              <li {...props} key={option.id}>
+                {option.name}
+              </li>
+            );
+          }}
+          renderTags={(tagValue, getTagProps) => {
+            return tagValue.map((option, index) => (
+              <Chip
+                {...getTagProps({ index })}
+                key={option.id}
+                label={option.name}
+              />
+            ));
+          }}
+        />
+      )}
       <input type="file" name="cover" onChange={handleChange} />
       <button onClick={addBook}>Add book</button>
     </>
