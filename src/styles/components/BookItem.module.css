@@ -1,21 +1,15 @@
 .bookItem {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0.5rem;
-}
-
-.emptyCover {
-    background-color: gainsboro;
-    border-radius: 10px;
-    width: 100%;
-    aspect-ratio: 0.7;
-    height: 100%;
+    flex-direction: row;
+    justify-content: last baseline;
+    background-color: #eee;
+    margin: 1rem;
 }
 
 .bookCover {
-    border-radius: 10px;
-    width: 100%;
+    background-color: gainsboro;
+    width: 100px;
     height: 100%;
+    aspect-ratio: 0.7;
+    margin-right: 1rem;
 }

@@ -3,6 +3,7 @@
 import { ListResult, RecordModel } from "pocketbase";
 import pb from "@/lib/pocketbase";
 import { useEffect, useState } from "react";
+import BookItem from "./BookItem";
 
 const LastAddedBooks = () => {
   const [data, setData] = useState<ListResult<RecordModel> | null>(null);
@@ -26,16 +27,7 @@ const LastAddedBooks = () => {
       <h2>Last added books</h2>
       {data &&
         data.items.map((book) => {
-          return (
-            <li key={book.id}>
-              <img
-                width={100}
-                src={`https://aya.gokay.works/api/files/${book.collectionId}/${book.id}/${book.cover}`}
-              />
-              {book.name}
-              <em>{book.isbn}</em>
-            </li>
-          );
+          return <BookItem key={book.id} data={book} />;
         })}
     </>
   );
