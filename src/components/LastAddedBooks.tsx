@@ -7,8 +7,13 @@ import BookItem from "./BookItem";
 
 const LastAddedBooks = () => {
   const [data, setData] = useState<ListResult<RecordModel> | null>(null);
+  const [search, setSearch] = useState("");
+  const [isSearch, setIsSearch] = useState(false);
+  const [searchData, setSearchData] = useState<ListResult<RecordModel> | null>(
+    null
+  );
 
-  const getAndSetData = async () => {
+  const getSetLatestBooks = async () => {
     const result = await pb
       .collection("atay_books")
       .getList(1, 20, { sort: "-created" });
@@ -18,17 +23,54 @@ const LastAddedBooks = () => {
     }
   };
 
+  const getSetSearchBooks = async (keyword: string) => {
+    const result = await pb
+      .collection("atay_books")
+      .getList(1, 20, { filter: `name ~ "${keyword}"`, sort: "-created" });
+
+    if (result != null) {
+      setSearchData(result);
+    }
+  };
+
+  const searchChange = (e: any) => {
+    if (e.target.value == 0) setIsSearch(false);
+    setSearch(e.target.value);
+  };
+
+  const searchSubmit = (e: any) => {
+    e.preventDefault();
+    setIsSearch(true);
+    getSetSearchBooks(search);
+  };
+
   useEffect(() => {
-    getAndSetData();
+    getSetLatestBooks();
   }, []);
 
   return (
     <>
       <h2>Last added books</h2>
-      {data &&
-        data.items.map((book) => {
-          return <BookItem key={book.id} data={book} />;
-        })}
+
+      <form onSubmit={searchSubmit}>
+        <input
+          type="text"
+          value={search}
+          onChange={searchChange}
+          onSubmit={searchSubmit}
+          placeholder="search..."
+        />
+        <button type="submit">saerch</button>
+      </form>
+      {isSearch
+        ? searchData &&
+          searchData.items.map((book) => {
+            return <BookItem key={book.id} data={book} />;
+          })
+        : data &&
+          data.items.map((book) => {
+            return <BookItem key={book.id} data={book} />;
+          })}
     </>
   );
 };
