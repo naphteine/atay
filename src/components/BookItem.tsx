@@ -1,8 +1,25 @@
+"use client";
+
 import { RecordModel } from "pocketbase";
 
 import styles from "@/styles/components/BookItem.module.css";
+import { useEffect, useState } from "react";
+import pb from "@/lib/pocketbase";
 
 const BookItem = ({ data }: { data: RecordModel }) => {
+  const [author, setAuthor] = useState<RecordModel[] | null>(null);
+
+  const getAuthors = async () => {
+    const result = await pb
+      .collection("atay_bookAuthors")
+      .getFullList({ filter: `book = "${data.id}"`, expand: "author" });
+    setAuthor(result);
+  };
+
+  useEffect(() => {
+    getAuthors();
+  }, []);
+
   return (
     <li className={styles.bookItem}>
       <div className={styles.bookCover}>
@@ -15,6 +32,15 @@ const BookItem = ({ data }: { data: RecordModel }) => {
       </div>
       <aside>
         <h3>{data.name}</h3>
+        {author && (
+          <ul>
+            {author.map((authorItem) => (
+              <li key={authorItem.expand?.author.id}>
+                {authorItem.expand?.author.name}
+              </li>
+            ))}
+          </ul>
+        )}
         <em>{data.isbn}</em>
       </aside>
     </li>
