@@ -8,7 +8,9 @@ const LastAddedAuthors = () => {
   const [data, setData] = useState<ListResult<RecordModel> | null>(null);
 
   const getAndSetData = async () => {
-    const result = await pb.collection("atay_authors").getList(1, 20);
+    const result = await pb
+      .collection("atay_authors")
+      .getList(1, 20, { sort: "-created" });
 
     if (result != null) {
       setData(result);
