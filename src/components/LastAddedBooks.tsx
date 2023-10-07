@@ -26,7 +26,16 @@ const LastAddedBooks = () => {
       <h2>Last added books</h2>
       {data &&
         data.items.map((book) => {
-          return <li key={book.id}>{book.name}</li>;
+          return (
+            <li key={book.id}>
+              <img
+                width={100}
+                src={`https://aya.gokay.works/api/files/${book.collectionId}/${book.id}/${book.cover}`}
+              />
+              {book.name}
+              <em>{book.isbn}</em>
+            </li>
+          );
         })}
     </>
   );
