@@ -5,6 +5,7 @@ import { useState } from "react";
 
 const AddAuthor = () => {
   const [author, setAuthor] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   const authorChange = (e: any) => {
     setAuthor(e.target.value);
@@ -13,6 +14,8 @@ const AddAuthor = () => {
   const addAuthor = async () => {
     if (!pb.authStore.model) return alert("Not logged in!");
     if (author === "") return alert("Author name can't be empty!");
+
+    setDisabled(true);
 
     try {
       const data = {
@@ -25,14 +28,22 @@ const AddAuthor = () => {
       alert(e);
     } finally {
       setAuthor("");
+      setDisabled(false);
     }
   };
 
   return (
     <>
       <h2>Add new author</h2>
-      <input placeholder="author name" onChange={authorChange} value={author} />
-      <button onClick={addAuthor}>Add author</button>
+      <input
+        disabled={disabled}
+        placeholder="author name"
+        onChange={authorChange}
+        value={author}
+      />
+      <button disabled={disabled} onClick={addAuthor}>
+        Add author
+      </button>
     </>
   );
 };
