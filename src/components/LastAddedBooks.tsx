@@ -58,9 +58,9 @@ const LastAddedBooks = () => {
           value={search}
           onChange={searchChange}
           onSubmit={searchSubmit}
-          placeholder="search..."
+          placeholder="book name..."
         />
-        <button type="submit">saerch</button>
+        <button type="submit">search</button>
       </form>
       {isSearch
         ? searchData &&
