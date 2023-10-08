@@ -19,7 +19,7 @@ const AddAuthor = () => {
 
     try {
       const data = {
-        name: author,
+        name: author.trim(),
         user: pb.authStore.model.id,
       };
 
