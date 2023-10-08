@@ -5,23 +5,15 @@ import { Autocomplete, Chip, TextField } from "@mui/material";
 import { RecordModel } from "pocketbase";
 import { ChangeEvent, useState, useEffect } from "react";
 
-interface bookObject {
-  name: string;
-  isbn: string;
-  pages: number;
-  cover: File | null;
-  user_id: string;
-}
-
 const AddBook = () => {
   const [authorList, setAuthorList] = useState<RecordModel[] | null>(null);
   const [selectedAuthors, setSelectedAuthors] = useState<RecordModel[]>([]);
 
-  const [book, setBook] = useState<bookObject>({
+  const [book, setBook] = useState({
     name: "",
     isbn: "",
     pages: 0,
-    cover: null,
+    cover: null as File | null,
     user_id: "",
   });
 
