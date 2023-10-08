@@ -41,7 +41,12 @@ const AddBook = () => {
     if (e.target.name === "pages" && +e.target.value < 0)
       return alert("Book pages can't be negative!");
 
-    setBook({ ...book, [e.target.name]: e.target.value });
+    if (e.target.name === "cover") {
+      const file = e.target.files?.[0];
+      setBook({ ...book, cover: file || null });
+    } else {
+      setBook({ ...book, [e.target.name]: e.target.value });
+    }
   };
 
   const addBook = async () => {
