@@ -16,7 +16,7 @@ const LastAddedBooks = () => {
   const getSetLatestBooks = async () => {
     const result = await pb
       .collection("atay_books")
-      .getList(1, 20, { sort: "-created" });
+      .getList(1, 20, { sort: "-created", expand: "publisher" });
 
     if (result != null) {
       setData(result);
@@ -26,7 +26,11 @@ const LastAddedBooks = () => {
   const getSetSearchBooks = async (keyword: string) => {
     const result = await pb
       .collection("atay_books")
-      .getList(1, 20, { filter: `name ~ "${keyword}"`, sort: "-created" });
+      .getList(1, 20, {
+        filter: `name ~ "${keyword}"`,
+        sort: "-created",
+        expand: "publisher",
+      });
 
     if (result != null) {
       setSearchData(result);

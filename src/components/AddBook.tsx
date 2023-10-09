@@ -9,12 +9,19 @@ const AddBook = () => {
   const [authorList, setAuthorList] = useState<RecordModel[] | null>(null);
   const [selectedAuthors, setSelectedAuthors] = useState<RecordModel[]>([]);
 
+  const [publisherList, setPublisherList] = useState<RecordModel[] | null>(
+    null
+  );
+  const [selectedPublisher, setSelectedPublisher] =
+    useState<RecordModel | null>(null);
+
   const [book, setBook] = useState({
     name: "",
     isbn: "",
     pages: 0,
     cover: null as File | null,
     user_id: "",
+    publisher: "",
   });
 
   const getAuthorList = async () => {
@@ -26,15 +33,32 @@ const AddBook = () => {
     }
   };
 
-  const handleAutocompleteChange = (
+  const getPublisherList = async () => {
+    try {
+      const result = await pb.collection("atay_publishers").getFullList();
+      setPublisherList(result);
+    } catch (e) {
+      alert(e);
+    }
+  };
+
+  const handleAuthorChange = (
     event: React.ChangeEvent<{}>,
     newValue: RecordModel[] | null
   ) => {
     setSelectedAuthors(newValue || []);
   };
 
+  const handlePublisherChange = (
+    event: React.ChangeEvent<{}>,
+    newValue: RecordModel | null
+  ) => {
+    setSelectedPublisher(newValue || null);
+  };
+
   useEffect(() => {
     getAuthorList();
+    getPublisherList();
   }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,10 +78,11 @@ const AddBook = () => {
     if (!pb.authStore?.model?.id) return alert("You are not logged in!");
 
     const userId = pb.authStore.model.id;
+    const publisherId = selectedPublisher?.id || "";
 
     const result = await pb
       .collection("atay_books")
-      .create({ ...book, user_id: userId });
+      .create({ ...book, user_id: userId, publisher: publisherId });
 
     console.log("BOOK RESULT: " + result);
     const bookId = result.id;
@@ -73,8 +98,16 @@ const AddBook = () => {
       console.log("AUTHOR RESULT: " + result_author);
     });
 
-    setBook({ name: "", isbn: "", pages: 0, cover: null, user_id: "" });
+    setBook({
+      name: "",
+      isbn: "",
+      pages: 0,
+      cover: null,
+      user_id: "",
+      publisher: "",
+    });
     setSelectedAuthors([]);
+    setSelectedPublisher(null);
   };
 
   return (
@@ -107,12 +140,40 @@ const AddBook = () => {
           multiple
           id="author"
           value={selectedAuthors}
-          onChange={handleAutocompleteChange}
+          onChange={handleAuthorChange}
           getOptionLabel={(author) => author.name}
           options={authorList}
           noOptionsText="Nothing found!"
           filterSelectedOptions
           renderInput={(params) => <TextField {...params} label="Author(s)" />}
+          renderOption={(props, option) => {
+            return (
+              <li {...props} key={option.id}>
+                {option.name}
+              </li>
+            );
+          }}
+          renderTags={(tagValue, getTagProps) => {
+            return tagValue.map((option, index) => (
+              <Chip
+                {...getTagProps({ index })}
+                key={option.id}
+                label={option.name}
+              />
+            ));
+          }}
+        />
+      )}
+      {publisherList && (
+        <Autocomplete
+          id="publisher"
+          value={selectedPublisher}
+          onChange={handlePublisherChange}
+          getOptionLabel={(publisher) => publisher.name}
+          options={publisherList}
+          noOptionsText="Nothing found!"
+          filterSelectedOptions
+          renderInput={(params) => <TextField {...params} label="Publisher" />}
           renderOption={(props, option) => {
             return (
               <li {...props} key={option.id}>

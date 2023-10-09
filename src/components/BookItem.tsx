@@ -32,6 +32,7 @@ const BookItem = ({ data }: { data: RecordModel }) => {
       </div>
       <aside>
         <h3>{data.name}</h3>
+        <h4>{data.expand && data.expand.publisher.name}</h4>
         {author && (
           <ul>
             {author.map((authorItem) => (
