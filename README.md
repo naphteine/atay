@@ -1,3 +1,3 @@
 # Atay
 
-This is a book library tracking web app developed using Next.js.
+Atay is a library management web app developed using Next.js.
