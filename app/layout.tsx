@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -29,6 +30,11 @@ export default function RootLayout({
         className={`dark ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Script
+          defer
+          src="https://umi.gokay.works/script.js"
+          data-website-id="57f1e17c-9a77-400c-aaf4-1e69414da2b9"
+        ></Script>
       </body>
     </html>
   );
