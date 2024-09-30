@@ -23,7 +23,7 @@ const AddPublisher = () => {
         user: pb.authStore.model.id,
       };
 
-      const result = await pb.collection("atay_publishers").create(data);
+      const result = await pb.collection("bookPublishers").create(data);
     } catch (e) {
       alert(e);
     } finally {

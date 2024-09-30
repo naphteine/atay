@@ -26,7 +26,7 @@ const AddBook = () => {
 
   const getAuthorList = async () => {
     try {
-      const result = await pb.collection("atay_authors").getFullList();
+      const result = await pb.collection("bookAuthors").getFullList();
       setAuthorList(result);
     } catch (e) {
       alert(e);
@@ -35,7 +35,7 @@ const AddBook = () => {
 
   const getPublisherList = async () => {
     try {
-      const result = await pb.collection("atay_publishers").getFullList();
+      const result = await pb.collection("bookPublishers").getFullList();
       setPublisherList(result);
     } catch (e) {
       alert(e);
@@ -81,7 +81,7 @@ const AddBook = () => {
     const publisherId = selectedPublisher?.id || "";
 
     const result = await pb
-      .collection("atay_books")
+      .collection("books")
       .create({ ...book, user_id: userId, publisher: publisherId });
 
     console.log("BOOK RESULT: " + result);
@@ -90,7 +90,7 @@ const AddBook = () => {
     console.log("bookId = " + bookId);
 
     selectedAuthors.map(async (author) => {
-      const result_author = await pb.collection("atay_bookAuthors").create({
+      const result_author = await pb.collection("bookAuthorRelation").create({
         book: bookId,
         author: author.id,
         user: userId,

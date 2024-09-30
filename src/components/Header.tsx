@@ -25,10 +25,9 @@ const Header = () => {
 
   const login = async () => {
     try {
-      console.log("ANAN REPORTS");
       console.log("EMAIL: " + email + " | PASS: " + password);
       const result = await pb
-        .collection("atay_users")
+        .collection("users")
         .authWithPassword(email, password);
       console.log(result);
     } catch (e) {

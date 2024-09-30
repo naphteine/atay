@@ -9,7 +9,7 @@ const LastAddedAuthors = () => {
 
   const getAndSetData = async () => {
     const result = await pb
-      .collection("atay_authors")
+      .collection("bookAuthors")
       .getList(1, 20, { sort: "-created" });
 
     if (result != null) {

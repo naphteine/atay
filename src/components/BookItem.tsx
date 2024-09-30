@@ -11,7 +11,7 @@ const BookItem = ({ data }: { data: RecordModel }) => {
 
   const getAuthors = async () => {
     const result = await pb
-      .collection("atay_bookAuthors")
+      .collection("bookAuthorRelation")
       .getFullList({ filter: `book = "${data.id}"`, expand: "author" });
     setAuthor(result);
   };

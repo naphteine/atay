@@ -9,7 +9,7 @@ const LastAddedPublishers = () => {
 
   const getAndSetData = async () => {
     const result = await pb
-      .collection("atay_publishers")
+      .collection("bookPublishers")
       .getList(1, 20, { sort: "-created" });
 
     if (result != null) {
