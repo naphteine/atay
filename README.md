@@ -1,6 +1,6 @@
-# Atay
+# Cyperus
 
-Atay is a library management web app developed using Next.js.
+Cyperus is a library management web app developed using Next.js.
 
 # Stack
 
