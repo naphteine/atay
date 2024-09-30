@@ -1,18 +1,11 @@
 # Cyperus
 
-Cyperus is a library management web app developed using Next.js.
+Cyperus is a personal library management web app (for physical books) developed using Next.js.
 
 # Stack
 
 - TypeScript
 - Next.js (App Directory)
-
-# Roadmap
-
-- Fix login/register
-- Book detail pages
-- Profiles
-- User shelves
 
 # Contributing
 
